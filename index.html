@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LubzFaith</title>
+    <style>
+        body {
+            font-family: "Courier new", serif;
+            background-color: #dacfbc;
+            color: black;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #b89c89;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            width: 100%;
+            box-sizing: border-box;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            flex: 1;
+            align-items: flex-start;
+        }
+        .gallery {
+            background: white;
+            padding: 15px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            overflow: hidden;
+            height: auto;
+        }
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: auto; /* Allow height to adjust to image size */
+            overflow: hidden;
+        }
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel img {
+            width: 100%;
+            height: auto;
+            object-fit: cover; /* Ensures the image fits inside the container without distortion */
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev-btn {
+            left: 0;
+        }
+        .next-btn {
+            right: 0;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #b89c89;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        footer {
+            background-color: #b89c89;
+            padding: 10px;
+            width: 98.8%;
+            margin-top: auto;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .gallery {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header_text">
+        LubzFaith Backgrounds
+    </header>
+    <div class="container">
+        <div class="gallery">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <img src="Watch1/Cover.jpg" alt="Gallery Image">
+                    <img src="Watch1/Anything is possible.jpg" alt="Gallery Image">
+                    <img src="Watch1/Cross.jpg" alt="Gallery Image">
+                    <img src="Watch1/Eyes on the Lord.jpg" alt="Gallery Image">
+                    <img src="Watch1/Let there be Light.jpg" alt="Gallery Image">
+                    <img src="Watch1/Other People.jpg" alt="Gallery Image">
+                </div>
+                <span class="carousel-btn prev-btn" onclick="moveSlide(-1)">&#10094;</span>
+                <span class="carousel-btn next-btn" onclick="moveSlide(1)">&#10095;</span>
+            </div>
+            <p>Watch Wallpaper Pack Edition 1</p>
+            <h6>All of these are tested on an Apple Watch Series 7.</h6>
+            <a class="download-btn" href="Series1/Watch.zip" download>Download</a>
+        </div>
+        <div class="gallery">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <img src="Phone1/Cover.jpg" alt="Gallery Image">
+                    <img src="Phone1/Darkest Valley.jpg" alt="Gallery Image">
+                    <img src="Phone1/Healed.jpg" alt="Gallery Image">
+                    <img src="Phone1/Heart.jpg" alt="Gallery Image">
+                    <img src="Phone1/John 19_30.jpg" alt="Gallery Image">
+                    <img src="Phone1/Wave of the sea.jpg" alt="Gallery Image">
+                </div>
+                <span class="carousel-btn prev-btn" onclick="moveSlide(-1)">&#10094;</span>
+                <span class="carousel-btn next-btn" onclick="moveSlide(1)">&#10095;</span>
+            </div>
+            <p>Mobile Wallpaper Pack Edition 1</p>
+            <h6>All of these are tested on an Iphone 13 Pro!</h6>
+            <a class="download-btn" href="Series1/Mobile.zip" download>Download</a>
+        </div>
+        <div class="gallery">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <img src="PC-Tablet1/Cover.jpg" alt="Gallery Image">
+                    <img src="PC-Tablet1/Love.jpg" alt="Gallery Image">
+                    <img src="PC-Tablet1/Faith.jpg" alt="Gallery Image">
+                    <img src="PC-Tablet1/Perfect.jpg" alt="Gallery Image">
+                    <img src="PC-Tablet1/Saved.jpg" alt="Gallery Image">
+                    <img src="PC-Tablet1/With God.jpg" alt="Gallery Image">
+                </div>
+                <span class="carousel-btn prev-btn" onclick="moveSlide(-1)">&#10094;</span>
+                <span class="carousel-btn next-btn" onclick="moveSlide(1)">&#10095;</span>
+            </div>
+            <p>PC - Tablet Wallpaper Pack Edition 1</p>
+            <h6>All of these are tested on an Macbook Air 2024 and Ipad 10!</h6>
+            <a class="download-btn" href="Series1/PC-Tablet.zip" download>Download</a>
+        </div>
+    </div>
+    <footer>
+        © LubzFaith - Lubbert Schenk
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+
+        function moveSlide(direction) {
+            const carousels = document.querySelectorAll('.carousel');
+            const totalSlides = carousels[0].children.length;
+
+            // Move to the next/previous image and loop around
+            currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+
+            carousels.forEach(carousel => {
+                carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            });
+        }
+    </script>
+</body>
+</html>
